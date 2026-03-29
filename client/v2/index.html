@@ -1,12 +1,76 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="style.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>🧱 Lego | Predictability of a lego set deal</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <h1>Lego</h1>
+
+    <!-- Animated pink lego bricks -->
+    <div id="lego-bricks">
+
+      <!-- Brick 1 — small 2x2 -->
+      <div class="brick-wrap">
+        <svg width="90" height="70" viewBox="0 0 90 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- top face -->
+          <rect x="5" y="20" width="80" height="44" rx="4" fill="#ff3e8e"/>
+          <!-- side shadow -->
+          <rect x="5" y="52" width="80" height="12" rx="2" fill="#c0205e"/>
+          <!-- studs -->
+          <ellipse cx="30" cy="20" rx="11" ry="6" fill="#ff6aaa"/>
+          <ellipse cx="30" cy="16" rx="11" ry="6" fill="#ff80b5"/>
+          <ellipse cx="60" cy="20" rx="11" ry="6" fill="#ff6aaa"/>
+          <ellipse cx="60" cy="16" rx="11" ry="6" fill="#ff80b5"/>
+          <!-- stud tops -->
+          <ellipse cx="30" cy="16" rx="8" ry="4" fill="#ffa0c8"/>
+          <ellipse cx="60" cy="16" rx="8" ry="4" fill="#ffa0c8"/>
+        </svg>
+      </div>
+
+      <!-- Brick 2 — tall 2x4 -->
+      <div class="brick-wrap">
+        <svg width="160" height="80" viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="22" width="150" height="48" rx="4" fill="#e8006e"/>
+          <rect x="5" y="58" width="150" height="14" rx="2" fill="#b0004f"/>
+          <!-- 4 studs -->
+          <ellipse cx="28"  cy="22" rx="13" ry="7" fill="#ff4d92"/>
+          <ellipse cx="28"  cy="16" rx="13" ry="7" fill="#ff6aaa"/>
+          <ellipse cx="28"  cy="16" rx="9"  ry="4.5" fill="#ff95c0"/>
+
+          <ellipse cx="68"  cy="22" rx="13" ry="7" fill="#ff4d92"/>
+          <ellipse cx="68"  cy="16" rx="13" ry="7" fill="#ff6aaa"/>
+          <ellipse cx="68"  cy="16" rx="9"  ry="4.5" fill="#ff95c0"/>
+
+          <ellipse cx="108" cy="22" rx="13" ry="7" fill="#ff4d92"/>
+          <ellipse cx="108" cy="16" rx="13" ry="7" fill="#ff6aaa"/>
+          <ellipse cx="108" cy="16" rx="9"  ry="4.5" fill="#ff95c0"/>
+
+          <ellipse cx="148" cy="22" rx="13" ry="7" fill="#ff4d92"/>
+          <ellipse cx="148" cy="16" rx="13" ry="7" fill="#ff6aaa"/>
+          <ellipse cx="148" cy="16" rx="9"  ry="4.5" fill="#ff95c0"/>
+        </svg>
+      </div>
+
+      <!-- Brick 3 — small 1x2, lighter pink -->
+      <div class="brick-wrap">
+        <svg width="100" height="60" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="18" width="90" height="36" rx="4" fill="#ff80b5"/>
+          <rect x="5" y="44" width="90" height="10" rx="2" fill="#d94080"/>
+          <!-- 2 studs -->
+          <ellipse cx="30" cy="18" rx="12" ry="6" fill="#ffaad0"/>
+          <ellipse cx="30" cy="13" rx="12" ry="6" fill="#ffc2de"/>
+          <ellipse cx="30" cy="13" rx="8"  ry="4" fill="#ffd6ea"/>
+
+          <ellipse cx="68" cy="18" rx="12" ry="6" fill="#ffaad0"/>
+          <ellipse cx="68" cy="13" rx="12" ry="6" fill="#ffc2de"/>
+          <ellipse cx="68" cy="13" rx="8"  ry="4" fill="#ffd6ea"/>
+        </svg>
+      </div>
+
+    </div>
+
     <section id="options">
       <div id="show">
         <label for="show-select">Show:</label>
@@ -39,7 +103,7 @@
       <h2>Lego sets</h2>
       <div>
         <label>Lego set id:</label>
-        <select id="lego-set-id-select"></select> 
+        <select id="lego-set-id-select"></select>
       </div>
     </section>
     <section id="indicators">

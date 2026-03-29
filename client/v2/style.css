@@ -1,246 +1,289 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap');
 
-/* ─── Variables ─────────────────────────────────────────────────────────────── */
 :root {
-  --bg:        #0f0f0f;
-  --surface:   #1a1a1a;
-  --surface2:  #242424;
-  --border:    #2e2e2e;
-  --accent:    #f5c400;
-  --accent2:   #ff4d4d;
-  --text:      #f0f0f0;
-  --muted:     #888;
-  --radius:    10px;
-  --font-head: 'Bebas Neue', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --bg:         #0d0d0d;
+  --surface:    #161616;
+  --surface2:   #1f1f1f;
+  --border:     #2a2a2a;
+  --pink:       #ff3e8e;
+  --pink-light: #ff80b5;
+  --pink-dim:   #3d1025;
+  --white:      #f5f5f5;
+  --muted:      #777;
+  --radius:     12px;
+  --font-head:  'Syne', sans-serif;
+  --font-body:  'DM Sans', sans-serif;
 }
 
-/* ─── Reset & Base ───────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
-  color: var(--text);
+  color: var(--white);
   font-family: var(--font-body);
   font-size: 15px;
   line-height: 1.6;
   min-height: 100vh;
-  padding-bottom: 60px;
+  padding-bottom: 80px;
 }
 
-/* ─── Header ─────────────────────────────────────────────────────────────────── */
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--pink-dim); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--pink); }
+
+/* ── Header ── */
 h1 {
   font-family: var(--font-head);
-  font-size: clamp(3rem, 8vw, 6rem);
-  letter-spacing: 0.04em;
-  color: var(--accent);
-  padding: 40px 40px 0;
-  line-height: 1;
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  padding: 48px 48px 0;
+  background: linear-gradient(135deg, #fff 0%, var(--pink-light) 60%, var(--pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 h1::after {
-  content: ' 🧱';
+  content: '.';
+  -webkit-text-fill-color: var(--pink);
 }
 
 h2 {
   font-family: var(--font-head);
-  font-size: 1.6rem;
-  letter-spacing: 0.06em;
-  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  color: var(--muted);
+  margin-bottom: 20px;
 }
 
-/* ─── Options bar ───────────────────────────────────────────────────────────── */
+/* ── Sticky nav bar ── */
 #options {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
-  padding: 24px 40px;
-  background: var(--surface);
+  gap: 10px;
+  padding: 18px 48px;
+  background: rgba(13, 13, 13, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
+#options > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 #options label {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   color: var(--muted);
-  margin-right: 4px;
 }
 
 select {
   background: var(--surface2);
-  color: var(--text);
+  color: var(--white);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 6px 12px;
+  border-radius: 8px;
+  padding: 7px 32px 7px 12px;
   font-family: var(--font-body);
   font-size: 13px;
   cursor: pointer;
-  transition: border-color 0.2s;
+  transition: border-color 0.15s, box-shadow 0.15s;
   appearance: none;
   -webkit-appearance: none;
-  padding-right: 28px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23777' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;
 }
 
-select:hover, select:focus {
-  border-color: var(--accent);
-  outline: none;
-}
+select:hover  { border-color: var(--pink); }
+select:focus  { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(255,62,142,0.15); outline: none; }
 
-/* ─── Filter spans ───────────────────────────────────────────────────────────── */
+/* ── Filter pills ── */
 #filters {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 #filters span {
-  padding: 6px 14px;
+  padding: 7px 16px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.2s;
-  user-select: none;
-}
-
-#filters span:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-#filters span[style*="bold"] {
-  background: var(--accent);
-  color: #000;
-  border-color: var(--accent);
-  font-weight: 700;
-}
-
-/* ─── Layout ─────────────────────────────────────────────────────────────────── */
-#lego, #indicators, #deals, #sales {
-  padding: 32px 40px;
-  border-bottom: 1px solid var(--border);
-}
-
-/* ─── Lego set selector ─────────────────────────────────────────────────────── */
-#lego label {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--muted);
-  margin-right: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+  white-space: nowrap;
 }
 
-/* ─── Indicators ─────────────────────────────────────────────────────────────── */
+#filters span:hover {
+  border-color: var(--pink);
+  color: var(--pink);
+  background: rgba(255, 62, 142, 0.06);
+}
+
+#filters span[style*="bold"] {
+  background: var(--pink);
+  color: #fff;
+  border-color: var(--pink);
+  font-weight: 700;
+}
+
+/* ── Sections ── */
+#lego, #indicators, #deals, #sales {
+  padding: 36px 48px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Lego set selector ── */
+#lego > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+#lego label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+/* ── Indicators ── */
 #indicators > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
+  padding: 14px 0;
   border-bottom: 1px solid var(--border);
-  max-width: 400px;
+  max-width: 480px;
 }
 
-#indicators > div:last-child {
-  border-bottom: none;
-}
+#indicators > div:last-child { border-bottom: none; }
 
 #indicators > div span:first-child {
-  color: var(--muted);
-  font-size: 13px;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  color: var(--muted);
 }
 
 #indicators > div span:last-child {
   font-family: var(--font-head);
-  font-size: 1.4rem;
-  color: var(--accent);
-  letter-spacing: 0.04em;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--pink);
 }
 
-/* ─── Deals grid ─────────────────────────────────────────────────────────────── */
+/* ── Deals grid ── */
 #deals > div {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .deal {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 18px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  transition: border-color 0.2s, transform 0.2s;
+  gap: 10px;
   position: relative;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+
+.deal::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--pink), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
 .deal:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
+  border-color: rgba(255, 62, 142, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(255, 62, 142, 0.1);
 }
 
+.deal:hover::before { opacity: 1; }
+
 .deal-id {
-  font-family: var(--font-head);
-  font-size: 0.85rem;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   color: var(--muted);
-  letter-spacing: 0.1em;
 }
 
 .deal-link {
-  color: var(--text);
+  color: var(--white);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
-  line-height: 1.4;
-  flex: 1;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.15s;
 }
 
-.deal-link:hover {
-  color: var(--accent);
-}
+.deal-link:hover { color: var(--pink-light); }
 
 .deal-price {
   font-family: var(--font-head);
-  font-size: 1.6rem;
-  color: var(--accent);
-  letter-spacing: 0.04em;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 .deal-meta {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 8px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .deal-discount {
-  background: var(--accent2);
+  background: var(--pink);
   color: #fff;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: 999px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
 }
 
 .deal-comments, .deal-temperature {
@@ -250,67 +293,117 @@ select:hover, select:focus {
 
 .deal-favorite {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  background: none;
-  border: none;
-  font-size: 18px;
+  top: 16px;
+  right: 16px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: all 0.15s;
   padding: 0;
   line-height: 1;
 }
 
 .deal-favorite:hover {
-  transform: scale(1.3);
+  border-color: var(--pink);
+  background: var(--pink-dim);
+  transform: scale(1.1);
 }
 
-/* ─── Sales grid ─────────────────────────────────────────────────────────────── */
+/* ── Sales grid ── */
 #sales > div {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 12px;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .sale {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 14px 16px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, transform 0.2s;
 }
 
 .sale:hover {
-  border-color: var(--accent);
+  border-color: rgba(255, 62, 142, 0.4);
+  transform: translateY(-2px);
 }
 
 .sale a {
-  color: var(--text);
+  color: var(--white);
   text-decoration: none;
   font-size: 13px;
   font-weight: 500;
   line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.15s;
 }
 
-.sale a:hover { color: var(--accent); }
+.sale a:hover { color: var(--pink-light); }
 
 .sale span:nth-child(2) {
   font-family: var(--font-head);
-  font-size: 1.3rem;
-  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--pink);
 }
 
 .sale span:nth-child(3) {
   font-size: 11px;
   color: var(--muted);
+  letter-spacing: 0.04em;
 }
 
-/* ─── Scrollbar ──────────────────────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+/* ── Ambient glow ── */
+body::before {
+  content: '';
+  position: fixed;
+  top: -200px;
+  left: -100px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255,62,142,0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Lego Bricks Hero ── */
+#lego-bricks {
+  display: flex;
+  gap: 32px;
+  align-items: flex-end;
+  padding: 32px 48px 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.brick-wrap:nth-child(1) { animation: float1 4s ease-in-out infinite; }
+.brick-wrap:nth-child(2) { animation: float2 5s ease-in-out infinite; animation-delay: 0.8s; }
+.brick-wrap:nth-child(3) { animation: float3 4.5s ease-in-out infinite; animation-delay: 1.6s; }
+
+@keyframes float1 {
+  0%, 100% { transform: translateY(0px) rotate(-4deg); }
+  50%       { transform: translateY(-14px) rotate(-4deg); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translateY(0px) rotate(3deg); }
+  50%       { transform: translateY(-20px) rotate(3deg); }
+}
+@keyframes float3 {
+  0%, 100% { transform: translateY(0px) rotate(-2deg); }
+  50%       { transform: translateY(-10px) rotate(-2deg); }
+}
