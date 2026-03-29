@@ -38,11 +38,10 @@ const spanFilterHot       = [...document.querySelectorAll('#filters span')]
 
 // Indicator spans (in order they appear in the HTML)
 const indicatorSpans = document.querySelectorAll('#indicators div span:nth-child(2)');
-const spanP5      = indicatorSpans[1]; // p5
-const spanP25     = indicatorSpans[2]; // p25
-const spanP50     = indicatorSpans[3]; // p50
-const spanLifetime = indicatorSpans[4]; // lifetime
-
+const spanP5       = indicatorSpans[2];
+const spanP25      = indicatorSpans[3];
+const spanP50      = indicatorSpans[4];
+const spanLifetime = indicatorSpans[5];
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 /**
@@ -50,16 +49,6 @@ const spanLifetime = indicatorSpans[4]; // lifetime
  * @param {Array} deals
  * @returns {Array}
  */
-const getIdsFromDeals = deals => {
-  const ids = [];
-  for (const deal of deals) {
-    if (deal.id && !ids.includes(deal.id)) {
-      ids.push(deal.id);
-    }
-  }
-  return ids;
-};
-
 /**
  * Sort deals array
  * @param {Array} deals
@@ -111,7 +100,7 @@ const quantile = (sorted, p) => {
  */
 const computeLifetime = sales => {
   if (!sales.length) return 0;
-  const dates = sales.map(s => new Date(s.published)).filter(d => !isNaN(d));
+  const dates = sales.map(s => new Date(s.published * 1000)).filter(d => !isNaN(d));
   if (!dates.length) return 0;
   const oldest = Math.min(...dates);
   const newest = Math.max(...dates);
@@ -188,7 +177,7 @@ const renderDeals = deals => {
         <span class="deal-id">${deal.id}</span>
         <a class="deal-link" href="${deal.link}" target="_blank" rel="noopener">${deal.title}</a>
         <span class="deal-price">€${deal.price}</span>
-        <span class="deal-discount">${deal.discount}%</span>
+        <span class="deal-discount">${deal.discount ?? '—'}%</span>
         <span class="deal-comments">💬 ${deal.comments}</span>
         <span class="deal-temperature">🌡 ${deal.temperature}</span>
         <button class="deal-favorite" data-uuid="${deal.uuid}">${isFav ? '❤️' : '🤍'}</button>
@@ -262,8 +251,8 @@ const renderSales = sales => {
   const template = sales.map(sale => `
     <div class="sale">
       <a href="${sale.link}" target="_blank" rel="noopener">${sale.title}</a>
-      <span>€${sale.price}</span>
-      <span>${sale.published}</span>
+      <span>€${sale.price?.amount || sale.price}</span>
+      <span>${new Date(sale.published * 1000).toLocaleDateString()}</span>
     </div>
   `).join('');
 
@@ -278,7 +267,7 @@ const renderSales = sales => {
 const renderSalesIndicators = sales => {
   spanNbSales.innerHTML = sales.length;
 
-  const prices = sales.map(s => parseFloat(s.price)).filter(p => !isNaN(p)).sort((a, b) => a - b);
+  const prices = sales.map(s => parseFloat(s.price?.amount || s.price)).filter(p => !isNaN(p)).sort((a, b) => a - b);
 
   if (spanP5)       spanP5.innerHTML   = prices.length ? quantile(prices, 0.05).toFixed(2) : '—';
   if (spanP25)      spanP25.innerHTML  = prices.length ? quantile(prices, 0.25).toFixed(2) : '—';
