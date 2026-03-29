@@ -173,16 +173,19 @@ const renderDeals = deals => {
   const template = deals.map(deal => {
     const isFav = favorites.includes(deal.uuid);
     return `
-      <div class="deal" id="${deal.uuid}">
-        <span class="deal-id">${deal.id}</span>
-        <a class="deal-link" href="${deal.link}" target="_blank" rel="noopener">${deal.title}</a>
-        <span class="deal-price">€${deal.price}</span>
-        <span class="deal-discount">${deal.discount ?? '—'}%</span>
-        <span class="deal-comments">💬 ${deal.comments}</span>
-        <span class="deal-temperature">🌡 ${deal.temperature}</span>
-        <button class="deal-favorite" data-uuid="${deal.uuid}">${isFav ? '❤️' : '🤍'}</button>
-      </div>
-    `;
+  
+  <div class="deal" id="${deal.uuid}">
+    <span class="deal-id">${deal.id}</span>
+    <a class="deal-link" href="${deal.link}" target="_blank" rel="noopener">${deal.title}</a>
+    <span class="deal-price">€${deal.price}</span>
+    <div class="deal-meta">
+      <span class="deal-discount">${deal.discount ?? '—'}%</span>
+      <span class="deal-comments">💬 ${deal.comments}</span>
+      <span class="deal-temperature">🌡 ${deal.temperature}</span>
+    </div>
+    <button class="deal-favorite" data-uuid="${deal.uuid}">${isFav ? '❤️' : '🤍'}</button>
+  </div>
+`;
   }).join('');
 
   div.innerHTML = template;
