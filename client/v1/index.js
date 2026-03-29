@@ -79,9 +79,6 @@ console.log(listOfcommunities);
 console.log("Number of communities:", listOfcommunities.length);
 
 // (your loop is fine, just noisy; keeping it)
-for (var currentDeal of deals) {
-  console.log(currentDeal.community);
-}
 // 🎯 TODO 4: Sort by price
 // 1. Create a function to sort the deals by price
 // 2. Create a variable and assign it the list of sets by price from lowest to highest
@@ -147,7 +144,7 @@ console.log("Deals by date recent -> old:", dealsByRecent);
 var filteredDeals = [];
 
 for (var  item of deals) {
-  if (item.discount < 50 && item.discount < 75){
+  if (item.discount >= 50 && item.discount <= 75){
     filteredDeals.push(item)
   }
 }
@@ -625,8 +622,7 @@ let sealedCamera = {
 
 // we make a copy of `sealedCamera` to `camera` variable
 // and set a new property `favorite` to true
-let camera = sealedCamera;
-
+camera = Object.assign({}, sealedCamera); 
 camera.favorite = true;
 
 console.log("sealedCamera (after camera.favorite=true):", sealedCamera);
