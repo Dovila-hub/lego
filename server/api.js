@@ -163,5 +163,42 @@ app.get('/sales/search', (request, response) => {
 });
 
 // ─── Start ───────────────────────────────────────────────────────────────────
+// ─── GET /deals ──────────────────────────────────────────────────────────────
+app.get('/deals', (request, response) => {
+  try {
+    const { page = 1, size = 6, filterBy, price, date } = request.query;
+    let results = DEALS.slice();
+    if (price) results = results.filter(d => d.price <= parseFloat(price));
+    if (filterBy === 'best-discount') results = results.filter(d => d.discount > 50);
+    else if (filterBy === 'most-commented') results = results.filter(d => d.comments > 15);
+    else if (filterBy === 'hot-deals') results = results.filter(d => d.temperature > 100);
+    results.sort((a, b) => a.price - b.price);
+    const pageNum = parseInt(page);
+    const sizeNum = parseInt(size);
+    const paginated = results.slice((pageNum - 1) * sizeNum, pageNum * sizeNum);
+    return response.status(200).json({
+      success: true,
+      data: { page: pageNum, size: sizeNum, total: results.length, result: paginated },
+    });
+  } catch (error) {
+    return response.status(500).json({ success: false, data: { result: [] } });
+  }
+});
+
+// ─── GET /sales ───────────────────────────────────────────────────────────────
+app.get('/sales', (request, response) => {
+  try {
+    const { id, limit = 12 } = request.query;
+    let results = id ? (SALES[id] || []) : [];
+    results = results.slice().sort((a, b) => b.published - a.published);
+    const limitNum = parseInt(limit);
+    return response.status(200).json({
+      success: true,
+      data: { limit: limitNum, total: results.length, result: results.slice(0, limitNum) },
+    });
+  } catch (error) {
+    return response.status(500).json({ success: false, data: { result: [] } });
+  }
+});
 app.listen(PORT);
-console.log(`📡 Running on port ${PORT}`);
+console.log(` Running on port ${PORT}`);
