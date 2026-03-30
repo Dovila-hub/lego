@@ -1,12 +1,10 @@
-import * as avenuedelabrique from './websites/avenuedelabrique.js';
 import * as vinted from './websites/vinted.js';
-import * as dealabs from './websites/dealabs.js';
 
-async function scrapeDealabs(url = 'https://www.dealabs.com/groupe/lego') {
+async function scrapeVinted(lego = '77255') {
   try {
-    console.log(`🕵️‍♀️  scraping ${url}`);
-    const deals = await dealabs.scrapeAndSave(url, './deals.json');
-    console.log(deals);
+    console.log(`🕵️‍♀️  scraping lego ${lego} from vinted.fr`);
+    const sales = await vinted.scrape(lego);
+    console.log(sales);
     console.log('done');
     process.exit(0);
   } catch (e) {
@@ -16,4 +14,4 @@ async function scrapeDealabs(url = 'https://www.dealabs.com/groupe/lego') {
 }
 
 const [,, param] = process.argv;
-scrapeDealabs(param);
+scrapeVinted(param);
