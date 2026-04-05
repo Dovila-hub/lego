@@ -2,8 +2,8 @@
 
 /**
  * API:
- * GET https://lego-api-blue.vercel.app/deals?page=1&size=6
- * GET https://lego-api-blue.vercel.app/sales?id=<legoSetId>
+ * GET https://server-theta-lime-49.vercel.app/deals?page=1&size=6
+ * GET https://server-theta-lime-49.vercel.app/sales?id=<legoSetId>
  */
 
 // ─── State ────────────────────────────────────────────────────────────────────
@@ -124,29 +124,26 @@ const setCurrentDeals = ({ result, meta }) => {
 const fetchDeals = async (page = 1, size = 6) => {
   try {
     const response = await fetch(
-      `https://lego-api-blue.vercel.app/deals?page=${page}&size=${size}`
+      `https://server-theta-lime-49.vercel.app/deals?page=${page}&size=${size}`
     );
     const body = await response.json();
     if (body.success !== true) {
       console.error(body);
-      return { currentDeals, currentPagination };
+      return { result: currentDeals, meta: currentPagination };
     }
-    return body.data;
+    return {
+      result: body.data.result,
+      meta: body.data.meta,
+    };
   } catch (error) {
     console.error(error);
-    return { currentDeals, currentPagination };
+    return { result: currentDeals, meta: currentPagination };
   }
 };
-
-/**
- * Fetch Vinted sales for a given lego set id
- * @param {string} id
- * @returns {Array}
- */
 const fetchSales = async id => {
   try {
     const response = await fetch(
-      `https://lego-api-blue.vercel.app/sales?id=${id}`
+      `https://server-theta-lime-49.vercel.app/sales?id=${id}`
     );
     const body = await response.json();
     if (body.success !== true) {
@@ -175,6 +172,7 @@ const renderDeals = deals => {
     return `
   
   <div class="deal" id="${deal.uuid}">
+    ${deal.photo ? `<img src="${deal.photo}" alt="${deal.title}" style="width:100%;max-height:150px;object-fit:contain;border-radius:8px;margin-bottom:8px;">` : ''}
     <span class="deal-id">${deal.id}</span>
     <a class="deal-link" href="${deal.link}" target="_blank" rel="noopener">${deal.title}</a>
     <span class="deal-price">€${deal.price}</span>

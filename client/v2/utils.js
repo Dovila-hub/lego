@@ -8,5 +8,5 @@
  * @returns {Array} list of lego set ids
  */
 const getIdsFromDeals = deals => {
-    return deals.map(deal => deal.id)
+    return [...new Set(deals.map(deal => deal.id).filter(id => id !== ''))];
 }
